@@ -41,7 +41,7 @@ class CLI
                 break
             end
         end
-        binding.pry
+        search_again_or_exit
     end
 
     def display_free_company_members
@@ -54,4 +54,19 @@ class CLI
             puts " "
         end
     end
+
+    def search_again_or_exit
+        puts "Would you like to do another search?"
+        puts "Type (Y)es to search again; type (N)o to exit application:"
+        input = gets.strip.downcase
+
+        if input != "yes" && input != "y" && input != "no" && input != "n"
+            puts "Sorry, that is not a valid option. Please try again"
+            search_again_or_exit
+        elsif input == "yes" || input == "y"
+            provide_fc_name
+        else
+            p "Good bye!"
+        end
+    end 
 end
