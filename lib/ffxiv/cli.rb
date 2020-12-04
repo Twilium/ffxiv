@@ -17,15 +17,13 @@ class CLI
     end
 
     def display_free_companies
-        counter = 1
-        @free_companies.each do |free_company|
+        @free_companies.each.with_index(1) do |free_company, i|
             # binding.pry
-            puts "#{counter} - "
+            puts "#{i} - "
             puts "ID: " + free_company.id
             puts "Name: " + free_company.name
             puts "Server: " + free_company.server
             puts " "
-            counter += 1
         end
         company_member_selection_or_new_search
     end
@@ -40,20 +38,20 @@ class CLI
                 company = @free_companies[input.to_i-1]
                 @fc_members = API.get_free_company_member_by_id(company.id)
                 display_free_company_members
+                break
             end
         end
+        binding.pry
     end
 
     def display_free_company_members
-        counter = 1
-        @fc_members.each do |member|
-            puts "#{counter} - "
+        @fc_members.each.with_index(1) do |member, i|
+            puts "#{i} - "
             puts "ID: #{member.id}"
             puts "Name: #{member.name}"
             puts "Rank: #{member.rank}"
             puts "Server: #{member.server}"
             puts " "
-            counter += 1
         end
     end
 end
