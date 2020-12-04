@@ -18,5 +18,9 @@ class API
         uri = URI(url)
         response = Net::HTTP.get(uri)
         formatted_response = JSON.parse(response)
+        members = formatted_response["FreeCompanyMembers"]
+        members.map do |members|
+            FreeCompanyMembers.new(members)
+        end
     end
 end
