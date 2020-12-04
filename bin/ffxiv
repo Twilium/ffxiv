@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/environment'
-API.new.call("heavensward")
+CLI.new.run
