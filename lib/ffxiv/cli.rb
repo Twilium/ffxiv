@@ -1,4 +1,5 @@
 class CLI
+
     def run
         greeting
         provide_fc_name
@@ -14,26 +15,32 @@ class CLI
         if input != "yes" && input != "y" && input != "no" && input != "n"
             puts "Sorry, I did not understand. Try again."
             choices
-        elsif input == "yes" || input == "y"
-
+        elsif input == "no" || input == "n"
+            pull_free_company_no_server
+        else
+            provide_fc_name_with_server
         end
 
     end
 
     def provide_fc_name
         puts "Please provide name for Free Company"
-        free_company = gets.strip
-        # puts free_company
-        @free_companies = API.get_free_company(free_company) 
+        @free_company = gets.strip
+        choices
+        # @free_companies = API.get_free_company(@free_company) 
+        # display_free_companies
+    end
+
+    def pull_free_company_no_server
+        @free_companies = API.get_free_company(@free_company) 
         display_free_companies
     end
 
+
     def provide_fc_name_with_server
-        puts "Please provide name for Free Company"
-        free_company = gets.strip
         puts "Please provide server name"
-        server_name = gets.strip
-        @free_companies = API.get_free_company_with_server_name(free_company, server_name)
+        @server_name = gets.strip
+        @free_companies = API.get_free_company_with_server_name(@free_company, @server_name)
         display_free_companies
     end
 
@@ -55,17 +62,26 @@ class CLI
     end
 
     def company_member_selection_or_new_search
-        puts "Would you like to see members of a Free Company? Type "
+        puts "Would you like to see members of a Free Company?"
+        puts " "
+        puts "Please type (Y)es or (N)o"
         input = gets.strip.downcase
-        while input != "exit"
-            if input == "back"
-                provide_fc_name
-            elsif input.to_i.between?(1, @free_companies.length)
+        if input != "yes" && input != "y" && input != "no" && input != "n"
+            puts "Sorry, I did not understand. Try again."
+            company_member_selection_or_new_search
+        elsif input == "yes" || input == "y"
+            puts "Please type number of desired Free Company:"
+            input = gets.strip.downcase
+            if input.to_i.between?(1, @free_companies.length)
                 company = @free_companies[input.to_i-1]
                 @fc_members = API.get_free_company_member_by_id(company.id)
                 display_free_company_members
-                break
+            else
+                puts "This number is not in range. Please try again."
+                company_member_selection_or_new_search
             end
+        else
+            search_again_or_exit
         end
         search_again_or_exit
     end
@@ -92,7 +108,9 @@ class CLI
         elsif input == "yes" || input == "y"
             provide_fc_name
         else
-            p "Good bye!"
+            puts "Good bye!"
+            exit
         end
     end 
+
 end
