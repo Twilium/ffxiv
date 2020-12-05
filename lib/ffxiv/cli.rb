@@ -13,6 +13,7 @@ class CLI
         free_company = gets.strip
         # puts free_company
         @free_companies = API.get_free_company(free_company) 
+        binding.pry
         display_free_companies
     end
 
