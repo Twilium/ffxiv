@@ -8,23 +8,33 @@ class CLI
         puts "Welcome to the FFXIV Free Company Search"
     end
 
+    def choices
+        puts "Would you like to add a server?"
+        choice = gets.strip.downcase
+
+    end
+
     def provide_fc_name
         puts "Please provide name for Free Company"
         free_company = gets.strip
         # puts free_company
         @free_companies = API.get_free_company(free_company) 
-        binding.pry
         display_free_companies
     end
 
     def display_free_companies
-        @free_companies.each.with_index(1) do |free_company, i|
+        if @free_companies.length > 25
+            puts "Too many results. Please try a more specific name or add a server name."
+            provide_fc_name
+        else 
+            @free_companies.each.with_index(1) do |free_company, i|
             # binding.pry
             puts "#{i} - "
             puts "ID: " + free_company.id
             puts "Name: " + free_company.name
             puts "Server: " + free_company.server
             puts " "
+            end
         end
         company_member_selection_or_new_search
     end
