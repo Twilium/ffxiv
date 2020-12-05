@@ -1,4 +1,5 @@
 class FreeCompanyMembers
+    
     @@all = []
 
     def initialize(attrs)
