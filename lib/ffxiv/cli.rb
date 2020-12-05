@@ -10,7 +10,13 @@ class CLI
 
     def choices
         puts "Would you like to add a server?"
-        choice = gets.strip.downcase
+        input = gets.strip.downcase
+        if input != "yes" && input != "y" && input != "no" && input != "n"
+            puts "Sorry, I did not understand. Try again."
+            choices
+        elsif input == "yes" || input == "y"
+
+        end
 
     end
 
@@ -19,6 +25,15 @@ class CLI
         free_company = gets.strip
         # puts free_company
         @free_companies = API.get_free_company(free_company) 
+        display_free_companies
+    end
+
+    def provide_fc_name_with_server
+        puts "Please provide name for Free Company"
+        free_company = gets.strip
+        puts "Please provide server name"
+        server_name = gets.strip
+        @free_companies = API.get_free_company_with_server_name(free_company, server_name)
         display_free_companies
     end
 
