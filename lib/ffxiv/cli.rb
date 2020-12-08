@@ -66,7 +66,6 @@ class CLI
                 puts " "
                 puts fc_table.render(:unicode)
                 puts " "
-
             end
         end
         company_member_selection_or_new_search
@@ -101,12 +100,19 @@ class CLI
     end
 
     def display_free_company_members
-        @fc_members.each.with_index(1) do |member, i|
-            puts "#{i} - "
-            puts "Name: #{member.name}"
-            puts "ID: #{member.id}"
-            puts "Rank: #{member.rank}"
-            puts "Server: #{member.server}"
+        # @fc_members.each.with_index(1) do |member, i|
+        #     puts "#{i} - "
+        #     puts "Name: #{member.name}"
+        #     puts "ID: #{member.id}"
+        #     puts "Rank: #{member.rank}"
+        #     puts "Server: #{member.server}"
+        #     puts " "
+        # end
+        @fc_members.each.with_index(1) do |member, i| 
+            member_table = TTY::Table.new(header: ["#", "Member Name", "ID", "Rank", "Server"])
+            member_table << ["#{i}", "#{member.name}", "#{member.id}", "#{member.rank}", "#{member.server}"]
+            puts " "
+            puts member_table.render(:unicode)
             puts " "
         end
     end
