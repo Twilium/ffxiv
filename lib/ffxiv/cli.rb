@@ -50,7 +50,7 @@ class CLI
     end
 
     def display_free_companies
-        if @free_companies.length > 25
+        if @free_companies.length > 35
             puts "Too many results. Please try a more specific name or add a server name."
             puts " "
             provide_fc_name
@@ -60,13 +60,13 @@ class CLI
             puts " "
             search_again_or_exit
         else 
-            @free_companies.each.with_index(1) do |free_company, i|
-            # binding.pry
-            puts "#{i} - "
-            puts "Name: " + free_company.name
-            puts "ID: " + free_company.id
-            puts "Server: " + free_company.server
-            puts " "
+            @free_companies.each.with_index(1) do |fc, i| 
+                fc_table = TTY::Table.new(header: ["#", "Free Company", "ID", "Server"])
+                fc_table << ["#{i}", "#{fc.name}", "#{fc.id}", "#{fc.server}"]
+                puts " "
+                puts fc_table.render(:unicode)
+                puts " "
+
             end
         end
         company_member_selection_or_new_search
