@@ -1,4 +1,4 @@
-# Ffxiv
+# FFXIV Free Company Search
 
 Welcome to the Final Fantasy XIV Free Company Search! Here you can easily and quickly search for any free company in all of Final Fantasy XIV! You are also able to pull the roster of each Free Company and see their FFXIV ID as well as Free Company Rank.
 
