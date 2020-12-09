@@ -6,13 +6,18 @@ class CLI
     end
 
     def greeting
-        puts "Welcome to the FFXIV Free Company Search!"
-        puts " "
+        # puts "Welcome to the FFXIV Free Company Search!".blink.cyan
+        # puts " "
+
+        puts "┌───────────────────────────────────────────┐"
+        puts "│ " + "Welcome to the FFXIV Free Company Search!".blink.cyan + " │"
+        puts "└──────────────∩─────────∩──────────────────┘"
+        puts "...............l(` ･ω ･´) l                  "
     end
 
     def choices
         prompt = TTY::Prompt.new
-        if prompt.yes?("Would you like to add a server?")
+        if prompt.yes?("Would you like to add a server?".light_cyan)
             provide_fc_name_with_server
         else
             pull_free_company_no_server
@@ -20,7 +25,7 @@ class CLI
     end
 
     def provide_fc_name
-        puts "Please provide name for Free Company"
+        puts "Please provide name for Free Company".cyan.bold
         @free_company = gets.strip
         puts " "
         choices
@@ -35,7 +40,8 @@ class CLI
 
 
     def provide_fc_name_with_server
-        puts "Please provide server name"
+        puts ""
+        puts "Please provide server name".cyan.bold
         @server_name = gets.strip
         puts " "
         @free_companies = API.get_free_company_with_server_name(@free_company, @server_name)
@@ -44,12 +50,12 @@ class CLI
 
     def display_free_companies
         if @free_companies.length > 35
-            puts "Too many results. Please try a more specific name or add a server name."
+            puts "Too many results. Please try a more specific name or add a server name.".bold.cyan
             puts " "
             provide_fc_name
         elsif @free_companies.length == 0
             puts " "
-            puts "No results."
+            puts "No results.".cyan.bold
             puts " "
             search_again_or_exit
         else 
@@ -157,6 +163,7 @@ class CLI
     end 
 
     def goodbye
+        binding.pry
         puts "Good bye!"
         exit
     end
