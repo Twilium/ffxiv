@@ -148,18 +148,11 @@ class CLI
     end
 
     def search_again_or_exit
-        puts "Would you like to do another search?"
-        puts "Type (Y)es to search again; type (N)o to exit application:"
-        input = gets.strip.downcase
-        puts " "
-        if input != "yes" && input != "y" && input != "no" && input != "n"
-            puts "Sorry, that is not a valid option. Please try again"
-            puts " "
-            search_again_or_exit
-        elsif input == "yes" || input == "y"
+        prompt = TTY::Prompt.new
+        if prompt.yes?("Would you like to do another search?")
             provide_fc_name
         else
-           goodbye
+            goodbye
         end
     end 
 
