@@ -6,3 +6,4 @@ gemspec
 gem "rake", "~> 12.0"
 gem "httparty"
 gem "tty-table"
+gem "tty-prompt"

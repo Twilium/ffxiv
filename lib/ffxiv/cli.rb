@@ -11,18 +11,26 @@ class CLI
     end
 
     def choices
-        puts "Would you like to add a server?"
-        input = gets.strip.downcase
-        puts " "
-        if input != "yes" && input != "y" && input != "no" && input != "n"
-            puts "Sorry, I did not understand. Try again."
-            puts " "
-            choices
-        elsif input == "no" || input == "n"
-            pull_free_company_no_server
-        else
+        prompt = TTY::Prompt.new
+        # puts "Would you like to add a server?"
+        if prompt.yes?("Would you like to add a server?")
             provide_fc_name_with_server
+        else
+            pull_free_company_no_server
         end
+        # input = gets.strip.downcase
+        # binding.pry
+        # puts " "
+        # if input != "yes" && input != "y" && input != "no" && input != "n"
+            # puts "Sorry, I did not understand. Try again."
+            # puts " "
+            # choices
+        # elsif input == "no" || input == "n"
+        # if prompt == false
+        #     pull_free_company_no_server
+        # else
+        #     provide_fc_name_with_server
+        # end
 
     end
 
