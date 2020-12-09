@@ -100,14 +100,6 @@ class CLI
     end
 
     def display_free_company_members
-        # @fc_members.each.with_index(1) do |member, i|
-        #     puts "#{i} - "
-        #     puts "Name: #{member.name}"
-        #     puts "ID: #{member.id}"
-        #     puts "Rank: #{member.rank}"
-        #     puts "Server: #{member.server}"
-        #     puts " "
-        # end
         @i ||= 0
         @updated_fc_members = @i == @fc_members.length ? @fc_members : @fc_members[@i..@i+49]
         @updated_fc_members.each.with_index(1) do |member, i| 
@@ -127,7 +119,8 @@ class CLI
 		    puts "type LESS from the full list to return to the truncated list."
 		    puts "type NEXT to page through the list 50 at a time."
 		    puts "type PREVIOUS to return to the preview view."
-		    puts "type EXIT at any time to close the program."
+            puts "type SEARCH to do another search query."
+            puts "type EXIT to close the program."
             puts " "
             page_iteration
     end
@@ -137,8 +130,34 @@ class CLI
         if input == "all"
             @i = @fc_members.length
             display_free_company_members
+        elsif input == "less"
+            @i = 0
+            display_free_company_members
+        elsif input == "next" && @i+50 > @fc_members.length
+            puts "Sorry, that's the end of the list!"
+            puts "Please try a different command: "
+            page_iteration
         elsif input == "next"
-
+            @i += 50
+            display_free_company_members
+        elsif input == "previous" && @i == 0
+            puts "This is the beginning of the list!"
+            puts "Please try again: "
+            page_iteration
+        elsif input == "previous" && @i == @fc_members.length
+            puts "This is the beginning of the list!"
+            puts "Please try again: "
+            page_iteration
+        elsif input == "previous"
+            @i -= 50
+        elsif input == "search"
+            search_again_or_exit
+        elsif input == "exit"
+            goodbye
+        else 
+            puts "Sorry, that is not a valid command!"
+            puts "Please try again: "
+            page_iteration
         end
     end
 
@@ -154,9 +173,13 @@ class CLI
         elsif input == "yes" || input == "y"
             provide_fc_name
         else
-            puts "Good bye!"
-            exit
+           goodbye
         end
     end 
+
+    def goodbye
+        puts "Good bye!"
+        exit
+    end
 
 end
