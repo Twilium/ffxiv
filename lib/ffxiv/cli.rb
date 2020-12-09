@@ -108,12 +108,37 @@ class CLI
         #     puts "Server: #{member.server}"
         #     puts " "
         # end
-        @fc_members.each.with_index(1) do |member, i| 
+        @i ||= 0
+        @updated_fc_members = @i == @fc_members.length ? @fc_members : @fc_members[@i..@i+49]
+        @updated_fc_members.each.with_index(1) do |member, i| 
             member_table = TTY::Table.new(header: ["#", "Member Name", "ID", "Rank", "Server"])
             member_table << ["#{i}", "#{member.name}", "#{member.id}", "#{member.rank}", "#{member.server}"]
             puts " "
-            puts member_table.render(:unicode)
+            print member_table.render(:unicode)
+        end
+            puts ""
+            puts "<- all ->" if @i != @fc_members.length
+		    puts "<- less  " if @i == @fc_members.length
+		    puts "  next ->" if @i == 0
+		    puts "<- previous |" + "| next ->" if @i >= 50 && @i+49 <@fc_members.length
+		    puts "<- previous  " if @i != 0
+		    puts ""
+		    puts "type ALL to see the full list."
+		    puts "type LESS from the full list to return to the truncated list."
+		    puts "type NEXT to page through the list 50 at a time."
+		    puts "type PREVIOUS to return to the preview view."
+		    puts "type EXIT at any time to close the program."
             puts " "
+            page_iteration
+    end
+
+    def page_iteration
+        input = gets.strip.downcase
+        if input == "all"
+            @i = @fc_members.length
+            display_free_company_members
+        elsif input == "next"
+
         end
     end
 
