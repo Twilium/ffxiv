@@ -10,7 +10,7 @@ class CLI
         # puts " "
 
         puts "┌───────────────────────────────────────────┐"
-        puts "│ " + "Welcome to the FFXIV Free Company Search!".blink.light_cyan + " │"
+        puts "│ " + "Welcome to the FFXIV Free Company Search!".light_cyan + " │"
         puts "└──────────────∩─────────∩──────────────────┘"
         puts "..............." + "l(` ･ω ･´) l                  ".magenta
     end
@@ -34,7 +34,6 @@ class CLI
     end
 
     def pull_free_company_no_server
-        puts "Searching...".blink
         @free_companies = API.get_free_company(@free_company) 
         display_free_companies
     end
@@ -45,7 +44,6 @@ class CLI
         puts "Please provide server name".cyan
         @server_name = gets.strip
         puts " "
-        puts "Searching...".blink
         @free_companies = API.get_free_company_with_server_name(@free_company, @server_name)
         display_free_companies
     end
@@ -62,8 +60,9 @@ class CLI
             search_again_or_exit
         else 
             @free_companies.each.with_index(1) do |fc, i| 
-                fc_table = TTY::Table.new(header: ["#", "Free Company", "ID", "Server"])
+                fc_table = TTY::Table.new(header: ["#".light_white, "Free Company".light_white, "ID".light_white, "Server".light_white])
                 fc_table << ["#{i}", "#{fc.name}", "#{fc.id}", "#{fc.server}"]
+                
                 puts " "
                 puts fc_table.render(:unicode)
                 puts " "
@@ -78,7 +77,6 @@ class CLI
             puts "Please type number of desired Free Company:".cyan
             input = gets.strip.downcase
             puts " "
-            puts "Searching...".blink
             if input.to_i.between?(1, @free_companies.length)
                 company = @free_companies[input.to_i-1]
                 @fc_members = API.get_free_company_member_by_id(company.id)
@@ -98,7 +96,7 @@ class CLI
         @i ||= 0
         @updated_fc_members = @i == @fc_members.length ? @fc_members : @fc_members[@i..@i+49]
         @updated_fc_members.each.with_index(1) do |member, i| 
-            member_table = TTY::Table.new(header: ["#", "Member Name", "ID", "Rank", "Server"])
+            member_table = TTY::Table.new(header: ["#".light_white, "Member Name".light_white, "ID".light_white, "Rank".light_white, "Server".light_white])
             member_table << ["#{i}", "#{member.name}", "#{member.id}", "#{member.rank}", "#{member.server}"]
             puts " "
             print member_table.render(:unicode)
