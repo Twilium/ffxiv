@@ -163,8 +163,21 @@ class CLI
     end 
 
     def goodbye
-        binding.pry
-        puts "Good bye!"
+        puts "     .d888b.    .d888b.    .d888b.    d88888b.      ".light_cyan.bold
+        puts "    .8P   Y8.  .8P   Y8.  .8P   Y8.   88    `8D     ".light_cyan.bold
+        puts "    88         88     88  88     88   88      88    ".light_cyan.bold
+        puts "    88   88P.  88     88  88     88   88      88    ".light_cyan.bold
+        puts "    88     88  88     88  88     88   88      88    ".light_cyan.bold
+        puts "    `8b    d8' `8b   d8'  `8b   d8'   88    .8D     ".light_cyan.bold
+        puts "     `Y888P'    `Y888P'    `Y888P'    Y88888D'      ".light_cyan.bold
+        puts ""
+        puts "    d88888b.  .d       b.   d888888b                ".light_cyan.bold
+        puts "    88    Y8.  `8P    Y8.   88'                     ".light_cyan.bold
+        puts "    88    88    `BP  Y8.    88                      ".light_cyan.bold
+        puts "    88888B       `BPY8.     8800000                 ".light_cyan.bold
+        puts "    88    88       88       88                      ".light_cyan.bold
+        puts "    88    d8'      88       88.                     ".light_cyan.bold
+        puts "    Y88888P'       YP       Y888888P                ".light_cyan.bold
         exit
     end
 
