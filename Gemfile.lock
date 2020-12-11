@@ -23,6 +23,7 @@ GEM
     strings-ansi (0.2.0)
     tty-color (0.6.0)
     tty-cursor (0.7.1)
+    tty-progressbar (0.2.0)
     tty-prompt (0.22.0)
       pastel (~> 0.8)
       tty-reader (~> 0.8)
@@ -46,6 +47,7 @@ DEPENDENCIES
   ffxiv!
   httparty
   rake (~> 12.0)
+  tty-progressbar
   tty-prompt
   tty-table
 

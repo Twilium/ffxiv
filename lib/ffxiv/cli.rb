@@ -6,9 +6,6 @@ class CLI
     end
 
     def greeting
-        # puts "Welcome to the FFXIV Free Company Search!".blink.cyan
-        # puts " "
-
         puts "┌───────────────────────────────────────────┐"
         puts "│ " + "Welcome to the FFXIV Free Company Search!".light_cyan + " │"
         puts "└──────────────∩─────────∩──────────────────┘"
@@ -29,8 +26,6 @@ class CLI
         @free_company = gets.strip
         puts " "
         choices
-        # @free_companies = API.get_free_company(@free_company) 
-        # display_free_companies
     end
 
     def pull_free_company_no_server
