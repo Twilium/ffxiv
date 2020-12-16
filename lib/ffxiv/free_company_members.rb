@@ -1,4 +1,4 @@
-class FreeCompanyMembers
+class FreeCompanyMember
     
     @@all = []
 
@@ -17,4 +17,5 @@ class FreeCompanyMembers
     def self.all
         @@all
     end
+
 end

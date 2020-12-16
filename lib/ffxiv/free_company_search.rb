@@ -1,4 +1,4 @@
-class FreeCompanySearch
+class FreeCompany
 
     @@all = []
 

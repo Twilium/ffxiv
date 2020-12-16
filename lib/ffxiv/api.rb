@@ -1,5 +1,6 @@
 class API
     attr_accessor :fc_name, :server_name
+    
     BASE_URL = "https://xivapi.com"
 
     def self.get_free_company(fc_name)
@@ -8,8 +9,8 @@ class API
         uri = URI(url)
         response = Net::HTTP.get(uri)
         formatted_response = JSON.parse(response)
-        formatted_response['Results'].map do |free_company|
-            FreeCompanySearch.new(free_company)
+        formatted_response['Results'].each do |free_company|
+            FreeCompany.new(free_company)
         end
     end
 
@@ -21,7 +22,7 @@ class API
         response = Net::HTTP.get(uri)
         formatted_response = JSON.parse(response)
         formatted_response['Results'].map do |free_company|
-            FreeCompanySearch.new(free_company)
+            FreeCompany.new(free_company)
         end
     end
 
@@ -32,7 +33,7 @@ class API
         formatted_response = JSON.parse(response)
         members = formatted_response["FreeCompanyMembers"]
         members.map do |members|
-            FreeCompanyMembers.new(members)
+            FreeCompanyMember.new(members)
         end
     end
 end
