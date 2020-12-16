@@ -8,7 +8,6 @@ class FreeCompanyMember
             self.send("#{k.downcase}=", v)
         end
         save
-        # binding.pry
     end
 
     def save
