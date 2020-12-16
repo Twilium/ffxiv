@@ -8,10 +8,11 @@ class FreeCompanyMember
             self.send("#{k.downcase}=", v)
         end
         save
+        # binding.pry
     end
 
     def save
-        self.class.all << self
+        @@all << self
     end
 
     def self.all

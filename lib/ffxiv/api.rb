@@ -21,7 +21,7 @@ class API
         uri = URI(url)
         response = Net::HTTP.get(uri)
         formatted_response = JSON.parse(response)
-        formatted_response['Results'].map do |free_company|
+        formatted_response['Results'].each do |free_company|
             FreeCompany.new(free_company)
         end
     end
@@ -32,7 +32,7 @@ class API
         response = Net::HTTP.get(uri)
         formatted_response = JSON.parse(response)
         members = formatted_response["FreeCompanyMembers"]
-        members.map do |members|
+        members.each do |members|
             FreeCompanyMember.new(members)
         end
     end
